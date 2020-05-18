@@ -2,6 +2,11 @@ plugins {
     id 'java'
 }
 
+ext {
+    jacksonVer = '2.11.0'
+    immutablesVer = '2.8.3'
+}
+
 group 'org.example'
 version '1.0-SNAPSHOT'
 
@@ -10,4 +15,11 @@ repositories {
 }
 
 dependencies {
+    // это библиотека, которую на бэке используют, чтобы снизить написание шаблонного кода
+    // она генерирует реализации простых классов на основе интерфейсов
+    compileOnly("org.immutables:value-annotations:$immutablesVer")
+    annotationProcessor("org.immutables:value-processor:$immutablesVer")
+
+    // зависимость Jackson-а
+    implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVer")
 }
